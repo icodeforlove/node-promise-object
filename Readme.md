@@ -11,29 +11,24 @@ var PromiseObject = require('promise-object');
 
 var User = PromiseObject.extend({
 	initialize: function (userId, success, error) {
-		this._super();
-		this._userId = userId;
-
-		this.getUserInfo().then(success, error);
+		this.userId = userId;
 	},
 
 	getUserInfo: function (deferred) {
-		var user = {id: this._userId};
+		var user = {id: this.userId};
 
-		this.getFollowerCount(this._userId).then(function (name) {
-			user.name = name;
+		this.getFollowerCount(this.userId).then(function (followers) {
+			user.followers = followers;
 			deferred.resolve(user);
 		});
 	},
 
-	getFollowerCount: function (deferred) {
+	getFollowerCount: function (deferred, userId) {
 		setTimeout(function () {
-			deferred.resolve('sam');
+			deferred.resolve(1234);
 		}, 1000);
 	}
 });
 
-new User(123, function (user) {
-	console.log(user);
-});
+var user = new User(123).getUserInfo().then(success, error);
 ```

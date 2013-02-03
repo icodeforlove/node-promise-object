@@ -55,9 +55,10 @@ var User = PromiseObject.create({
 new User(123, function (user) {
 	console.log(user);
 });
+```
 
 ## extending objects
-
+```javascript
 var PromiseObject = require('promise-object');
 
 var User = PromiseObject.create({
@@ -71,9 +72,10 @@ var Admin = User.extend({
 		this._super();
 	}
 });
+```
 
 ## mixins
-
+```javascript
 var PromiseObject = require('promise-object');
 
 var RandomIdMixin =  {
@@ -94,3 +96,4 @@ var User = PromiseObject.create(RandomIdMixin, {
 		console.log(this.userIdToString());
 	}
 });
+```

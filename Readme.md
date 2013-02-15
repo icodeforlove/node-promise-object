@@ -99,7 +99,9 @@ var RandomIdMixin =  {
 };
 
 var User = PromiseObject.create(RandomIdMixin, {
-	initialize: function () {
+	initialize: function ($super) {
+		$super();
+		
 		console.log(this.userIdToString());
 	}
 });

@@ -6,7 +6,7 @@ provides a base object that gives you the ability to create promise methods just
 
 ## pseudo params
 there are a few rules with these params
-* if you want to use $deferred it MUST be the first param
+* if you want to use **$deferred** it MUST be the first param
 * any other pseudo param must be before any real params
 
 these pseudo params are supported
@@ -36,9 +36,7 @@ var User = PromiseObject.create({
 var PromiseObject = require('promise-object');
 
 var User = PromiseObject.create({
-	initialize: function ($super, userId, success, error) {
-		$super();
-
+	initialize: function (userId, success, error) {
 		this._userId = userId;
 
 		this.getUserInfo().then(success, error);
@@ -66,21 +64,23 @@ new User(123, function (user) {
 ```
 
 ## extending methods/objects
-first off every method is extendable and deferrable to run the parent method you can request it by using the pseudo param $super
+first off every method is extendable and deferrable to run the parent method you can request it by using the pseudo param **$super**
 ```javascript
 var PromiseObject = require('promise-object');
 
 var User = PromiseObject.create({
-	initialize: function () {
-
+	initialize: function (name) {
+		this._name = name;
 	}
 });
 
 var Admin = User.extend({
-	initialize: function ($super) {
-		$super();
+	initialize: function ($super, name) {
+		$super(name);
 	}
 });
+
+var joe = new Admin('joe');
 ```
 
 ## mixins
@@ -100,8 +100,6 @@ var RandomIdMixin =  {
 
 var User = PromiseObject.create(RandomIdMixin, {
 	initialize: function () {
-		this._super();
-
 		console.log(this.userIdToString());
 	}
 });

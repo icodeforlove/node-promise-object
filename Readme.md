@@ -11,7 +11,7 @@ there are a few rules with these params
 
 these pseudo params are supported
 * **$deferred** converts the method into a deferred method
-* **$super** returns the methods parent method
+* **$super** returns the parents constructor
 * **$self** alternative to var self = this;
 
 example
@@ -64,7 +64,7 @@ new User(123, function (user) {
 ```
 
 ## extending methods/objects
-first off every method is extendable and deferrable to run the parent method you can request it by using the pseudo param **$super**
+only the initialize method supports the pseudo param **$super**
 ```javascript
 var PromiseObject = require('promise-object');
 

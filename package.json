@@ -1,6 +1,6 @@
 {
   "name": "promise-object",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "helper object for when.js",
   "main": "index.js",
   "directories": {

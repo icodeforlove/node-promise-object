@@ -1,24 +1,31 @@
 ## promise-object
-gives you the ability to create promise methods just by setting the first parameter to deferred and also binds those methods to the instance.
+provides a base object that gives you the ability to create promise methods just by setting the first parameter to $deferred and also binds those methods to the instance. It also allows you to extend any method and supports mixins.
 
 ## installation
 	npm install promise-object
 
-## magic
+## pseudo params
+there are a few rules with these params
+* if you want to use $deferred it MUST be the first param
+* any other pseudo param must be before any real params
 
-when putting deferred as a param it will convert the object into a deferred object, also when putting self it will return the object reference.
+these pseudo params are supported
+* **$deferred** converts the method into a deferred method
+* **$super** returns the methods parent method
+* **$self** alternative to var self = this;
 
+example
 ```javascript
 var User = PromiseObject.create({
 	initialize: function () {
 	},
-	someMethod: function (deferred, self) {
+	someMethod: function ($deferred, $self) {
 		// returns this
-		deferred.resolve(self);
+		$deferred.resolve($self);
 	},
-	someOtherMethod: function (self) {
+	someOtherMethod: function ($self) {
 		// returns this
-		return self;
+		return $self;
 	}
 });
 ```
@@ -29,25 +36,26 @@ var User = PromiseObject.create({
 var PromiseObject = require('promise-object');
 
 var User = PromiseObject.create({
-	initialize: function (userId, success, error) {
-		this._super();
+	initialize: function ($super, userId, success, error) {
+		$super();
+
 		this._userId = userId;
 
 		this.getUserInfo().then(success, error);
 	},
 
-	getUserInfo: function (deferred) {
+	getUserInfo: function ($deferred) {
 		var user = {id: this._userId};
 
 		this.getFollowerCount(this._userId).then(function (name) {
 			user.name = name;
-			deferred.resolve(user);
+			$deferred.resolve(user);
 		});
 	},
 
-	getFollowerCount: function (deferred) {
+	getFollowerCount: function ($deferred) {
 		setTimeout(function () {
-			deferred.resolve('sam');
+			$deferred.resolve('sam');
 		}, 1000);
 	}
 });
@@ -57,7 +65,8 @@ new User(123, function (user) {
 });
 ```
 
-## extending objects
+## extending methods/objects
+first off every method is extendable and deferrable to run the parent method you can request it by using the pseudo param $super
 ```javascript
 var PromiseObject = require('promise-object');
 
@@ -68,8 +77,8 @@ var User = PromiseObject.create({
 });
 
 var Admin = User.extend({
-	initialize: function () {
-		this._super();
+	initialize: function ($super) {
+		$super();
 	}
 });
 ```

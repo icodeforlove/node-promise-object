@@ -1,5 +1,5 @@
 ## promise-object
-provides a base object that gives you the ability to create promise methods just by setting the first parameter to $deferred and also binds those methods to the instance. It also allows you to extend any method.
+provides a base object that gives you the ability to create promise methods just by setting the first parameter to $deferred and also binds those methods to the instance. It also allows you to extend any method and use mixins.
 
 ## installation
 	npm install promise-object
@@ -110,5 +110,36 @@ var Admin = User.extend({
 var joe = new Admin('joe');
 joe.getInfo(function (info) {
 	
+});
+```
+
+## mixins
+```javascript
+var PromiseObject = require('promise-object');
+
+var Mixin =  {
+	getRandomNumber: function () {
+		return Math.random();
+	}
+};
+
+var Mixin2 = {
+	getRandomNumberDeferred: function ($deferred) {
+		$deferred.resolve(Math.random());
+	}
+}
+
+var Class = PromiseObject.create(Mixin, Mixin2, {
+	initialize: function () {
+	}
+});
+
+// examples
+var example = new Class();
+
+console.log(example.getRandomNumber());
+
+example.getRandomNumberDeferred().then(function (number) {
+	console.log(number);
 });
 ```

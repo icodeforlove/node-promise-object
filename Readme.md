@@ -15,23 +15,12 @@ these pseudo params are supported
 * **$self** alternative to var self = this;
 * **$config** ensures that the first argument is an object
 
-example
+## $config
+helper that makes working with $config objects a little easier
+
 ```javascript
-var User = PromiseObject.create({
-	initialize: function () {
-	},
-	someMethod: function ($deferred, $self) {
-		// returns this
-		$deferred.resolve($self);
-	},
-	someOtherMethod: function ($self) {
-		// returns this
-		return $self;
-	}
-});
-```
-## config example
-```javascript
+var PromiseObject = require('promise-object');
+
 var User = PromiseObject.create({
 	initialize: function ($config) {
 		this._name = $config.name;
@@ -42,40 +31,42 @@ new User({name: 'joe'});
 new User(); // this does not error out because $config was replaced with an empty object
 ```
 
-## promise
+## $deferred / promises
+promises make life a lot easier when dealing with heavy async logic, promise-object uses [when](https://github.com/cujojs/when) for promises so all deferred methods can be used with **when** and not have any scope issues.
+
+below is an example of using promises and showing errors
 
 ```javascript
 var PromiseObject = require('promise-object');
 
 var User = PromiseObject.create({
-	initialize: function (userId, success, error) {
-		this._userId = userId;
-
-		this.getUserInfo().then(success, error);
+	initialize: function (name) {
+		this._name = name;
 	},
 
-	getUserInfo: function ($deferred) {
-		var user = {id: this._userId};
-
-		this.getFollowerCount(this._userId).then(function (name) {
-			user.name = name;
-			$deferred.resolve(user);
-		});
-	},
-
-	getFollowerCount: function ($deferred) {
+	getInfo: function ($deferred, error) {
 		setTimeout(function () {
-			$deferred.resolve('sam');
+			if (error) {
+				$deferred.reject(new Error('Something went wrong'));
+			} else {
+				$deferred.resolve({age: 12});
+			}
 		}, 1000);
 	}
 });
 
-new User(123, function (user) {
-	console.log(user);
-});
+var joe = new User('joe');
+joe.getInfo(false).then(
+	function (info) {
+		console.log(info);
+	},
+	function (error) {
+		console.log(error);
+	}
+);
 ```
 
-## extending methods/objects
+## extending
 any method can be extended upon, **$super** is used to request the parent method
 ```javascript
 var PromiseObject = require('promise-object');
@@ -108,8 +99,8 @@ var Admin = User.extend({
 });
 
 var joe = new Admin('joe');
-joe.getInfo(function (info) {
-	
+joe.getInfo().then(function (info) {
+	console.log(info);
 });
 ```
 
@@ -127,7 +118,7 @@ var Mixin2 = {
 	getRandomNumberDeferred: function ($deferred) {
 		$deferred.resolve(Math.random());
 	}
-}
+};
 
 var Class = PromiseObject.create(Mixin, Mixin2, {
 	initialize: function () {

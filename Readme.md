@@ -11,8 +11,9 @@ there are a few rules with these params
 
 these pseudo params are supported
 * **$deferred** converts the method into a deferred method
-* **$super** returns the parents constructor
+* **$super** returns the parent method
 * **$self** alternative to var self = this;
+* **$config** ensures that the first argument is an object
 
 example
 ```javascript
@@ -28,6 +29,17 @@ var User = PromiseObject.create({
 		return $self;
 	}
 });
+```
+## config example
+```javascript
+var User = PromiseObject.create({
+	initialize: function ($config) {
+		this._name = $config.name;
+	}
+});
+
+new User({name: 'joe'});
+new User(); // this does not error out because $config was replaced with an empty object
 ```
 
 ## promise
@@ -64,21 +76,39 @@ new User(123, function (user) {
 ```
 
 ## extending methods/objects
-only the initialize method supports the pseudo param **$super**
+any method can be extended upon, **$super** is used to request the parent method
 ```javascript
 var PromiseObject = require('promise-object');
 
 var User = PromiseObject.create({
 	initialize: function (name) {
 		this._name = name;
+	},
+
+	getInfo: function ($deferred) {
+		setTimeout(function () {
+			$deferred.resolve({age: 12});
+		}, 0);
 	}
 });
 
 var Admin = User.extend({
 	initialize: function ($super, name) {
 		$super(name);
+	},
+
+	getInfo: function ($deferred, $super) {
+		$super().then(function (info) {
+			info.moreStuff = 123;
+
+			$deferred.resolve(info);
+
+		}, $deferred.reject);
 	}
 });
 
 var joe = new Admin('joe');
+joe.getInfo(function (info) {
+	
+});
 ```

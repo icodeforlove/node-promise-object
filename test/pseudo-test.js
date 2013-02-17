@@ -34,6 +34,12 @@ var ExtendedClassWithNoPseudoParams = ClassWithNoPseudoParams.extend({
 	}
 });
 
+var BadPseudoSuperParam = PromiseObject.create({
+	initialize: function ($super, name) {
+		$super(name);
+	}
+});
+
 var suite = vows.describe('Pseudo Param Tests');
 
 suite.addBatch({
@@ -66,6 +72,20 @@ suite.addBatch({
 
 		'is the name set': function (topic) {
 			assert.equal(topic.getName(), 'sally');
+		}
+	},
+
+	'Bad $super usage': {
+		topic: function () {
+			try {
+				new BadPseudoSuperParam();
+			} catch(error) {
+				this.callback(error);
+			}
+		},
+
+		'is the name set': function (error, topic) {
+			assert.equal(error.message, 'Pseudo $super Argument: "initialize" has no super method');
 		}
 	}
 });

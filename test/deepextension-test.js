@@ -236,7 +236,6 @@ suite.addBatch({
 	'Extending 8 Deferred Methods': {
 		topic: function () {
 			var self = this;
-			var start = Date.now();
 			var example = new Class8({name: '8 classes'});
 			example.updateCount(0).then(function (value) {
 				self.callback(null, {object: example, value: value});

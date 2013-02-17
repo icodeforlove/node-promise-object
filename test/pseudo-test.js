@@ -1,0 +1,73 @@
+var vows = require('vows'),
+	assert = require('assert'),
+	PromiseObject = require('promise-object');
+
+var ClassWithPseudoInit = PromiseObject.create({
+	initialize: function ($self, name) {
+		this._name = name;
+	},
+
+	getName: function () {
+		return this._name;
+	}
+});
+
+var ExtendedClassWithPseudoInit = ClassWithPseudoInit.extend({
+	initialize: function ($super, name) {
+		$super(name);
+	}
+});
+
+var ClassWithNoPseudoParams = PromiseObject.create({
+	initialize: function (name) {
+		this._name = name;
+	},
+
+	getName: function () {
+		return this._name;
+	}
+});
+
+var ExtendedClassWithNoPseudoParams = ClassWithNoPseudoParams.extend({
+	initialize: function ($super, name) {
+		$super(name);
+	}
+});
+
+var suite = vows.describe('Pseudo Param Tests');
+
+suite.addBatch({
+	'Init Class With Pseudo Params': {
+		topic: new ClassWithPseudoInit('james'),
+
+		'is the name set': function (topic) {
+			assert.equal(topic.getName(), 'james');
+		}
+	},
+
+	'Init Class Without Pseudo Params': {
+		topic: new ClassWithNoPseudoParams('bob'),
+
+		'is the name set': function (topic) {
+			assert.equal(topic.getName(), 'bob');
+		}
+	},
+
+	'Init Extended Class With Pseudo Params': {
+		topic: new ExtendedClassWithPseudoInit('joe'),
+
+		'is the name set': function (topic) {
+			assert.equal(topic.getName(), 'joe');
+		}
+	},
+
+	'Init Extended Class Without Pseudo Params': {
+		topic: new ExtendedClassWithNoPseudoParams('sally'),
+
+		'is the name set': function (topic) {
+			assert.equal(topic.getName(), 'sally');
+		}
+	}
+});
+
+exports.tests = suite;

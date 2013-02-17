@@ -1,6 +1,6 @@
 {
   "name": "promise-object",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "helper object for when.js",
   "main": "index.js",
   "directories": {
@@ -16,7 +16,9 @@
   ],
   "author": "Chad Scira",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "vows": "0.7.0"
+  },
   "dependencies": {
     "when": "git://github.com/icodeforlove/when.git"
   }

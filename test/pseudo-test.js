@@ -1,6 +1,6 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	PromiseObject = require('promise-object');
+	PromiseObject = require('../lib/promise-object');
 
 var ClassWithPseudoInit = PromiseObject.create({
 	initialize: function ($self, name) {

@@ -21,5 +21,8 @@
   },
   "dependencies": {
     "when": "git://github.com/icodeforlove/when.git"
+  },
+  "scripts": {
+    "test": "vows --spec"
   }
 }

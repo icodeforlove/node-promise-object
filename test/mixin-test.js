@@ -1,7 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	PromiseObject = require('../lib/promise-object');
-
+	PromiseObject = require('../lib/promise-object'),
+	EventsMixin = require('../mixins/events');
 
 var MixinWithoutPseudoParams = {
 	getName: function () {

@@ -20,7 +20,8 @@
     "vows": "0.7.0"
   },
   "dependencies": {
-    "when": "git://github.com/icodeforlove/when.git"
+    "when": "git://github.com/icodeforlove/when.git",
+    "underscore": "~1.4.4"
   },
   "scripts": {
     "test": "vows --spec"

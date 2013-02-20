@@ -1,4 +1,4 @@
-## promise-object
+## promise-object [![Build Status](https://travis-ci.org/icodeforlove/node-promise-object.png?branch=master)](https://travis-ci.org/icodeforlove/node-promise-object)
 provides a base object that gives you the ability to create promise methods just by setting the first parameter to $deferred and also binds those methods to the instance. It also allows you to extend any method and use mixins.
 
 ## installation

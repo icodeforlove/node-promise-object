@@ -134,3 +134,23 @@ example.getRandomNumberDeferred().then(function (number) {
 	console.log(number);
 });
 ```
+
+mixins should only use initialize to store instance vars
+
+```javascript
+var Mixin =  {
+	initialize: function () {
+		this._tags = [];
+	},
+	
+	hasTag: function (tag) {
+		return this._tags.indexOf(tag) !== -1;
+	},
+
+	addTag: function (tag) {
+		if (this.hasTag(tag)) return;
+		
+		this._tags.push(tag);
+	}
+};
+```

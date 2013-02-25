@@ -1,18 +1,17 @@
 module.exports = {
-	// public
+	initialize: function () {
+		this._listeners = {};
+	},
 
 	addEventListener: function(type, listener, capture) {
-		this._listeners = this._listeners || {};
-
 		if (typeof this._listeners[type] == 'undefined'){
 			this._listeners[type] = [];
 		}
 
 		this._listeners[type].push(listener);
 	},
+
 	removeEventListener: function(type, listener) {
-		this._listeners = this._listeners || {};
-		
 		if (this._listeners[type] instanceof Array){
 			var listeners = this._listeners[type];
 			for (var i=0, l=listeners.length; i < l; i++){
@@ -24,9 +23,8 @@ module.exports = {
 			}
 		}
 	},
+	
 	dispatchEvent: function(event, details, originalEvent) {
-		this._listeners = this._listeners || {};
-		
 		event = (typeof event == 'string') ? { type: event } : event;
 		event.target = (!event.target) ? this : event.target;
 		event.timestamp = new Date().getTime();
@@ -45,8 +43,6 @@ module.exports = {
 	
 	// private
 	_callListeners: function(event) {
-		this._listeners = this._listeners || {};
-		
 		if (this._listeners[event.type] instanceof Array){
 			var listeners = this._listeners[event.type];
 			for (var i=0, l=listeners.length; i < l; i++){

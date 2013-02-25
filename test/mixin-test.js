@@ -15,9 +15,13 @@ var MixinWithPseudoParams = {
 	}
 };
 
-var BadMixin = {
+var MixinWithInitializer = {
 	initialize: function () {
+		this._items = [];
+	},
 
+	getItems: function () {
+		return this._items;
 	}
 };
 
@@ -67,22 +71,20 @@ suite.addBatch({
 		}
 	},
 
-	'Mixin Using Initialize Error': {
+	'Mixin Using Initialize': {
 		topic: function () {
-			try {
-				PromiseObject.create(MixinWithoutPseudoParams, BadMixin, {
-					initialize: function ($self, name) {
-						this._name = name;
-					}
-				});
-			} catch (error) {
-				this.callback(error);
-			}
+			var Example = PromiseObject.create(MixinWithoutPseudoParams, MixinWithInitializer, {
+				initialize: function ($self, name) {
+					this._name = name;
+				}
+			});
+
+			this.callback(null, new Example('james'));	
 		},
 
-		'does error exist': function (error, topic) {
-			assert.instanceOf (error, Error);
-			assert.equal(error.message, 'Mixin: cannot override initialize');
+		'does error exist': function (topic) {
+			assert.isArray(topic.getItems());
+			assert.equal(topic.getName(), 'james');
 		}
 	},
 

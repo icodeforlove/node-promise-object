@@ -1,6 +1,6 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	when = require('when'),
+	when = require('whenplus'),
 	PromiseObject = require('../lib/promise-object');
 
 var Class1 = PromiseObject.create({

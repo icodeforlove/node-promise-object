@@ -179,7 +179,7 @@ suite.addBatch({
 		'value results': function (topic) {
 			assert.equal(topic.value, 1);
 		},
-		
+
 		'name': function (topic) {
 			assert.equal(topic.object.getName(), '1 classes');
 		},
@@ -201,7 +201,7 @@ suite.addBatch({
 		'value results': function (topic) {
 			assert.equal(topic.value, 2);
 		},
-		
+
 		'name': function (topic) {
 			assert.equal(topic.object.getName(), '2 classes');
 		},
@@ -223,7 +223,7 @@ suite.addBatch({
 		'value results': function (topic) {
 			assert.equal(topic.value, 3);
 		},
-		
+
 		'name': function (topic) {
 			assert.equal(topic.object.getName(), '3 classes');
 		},
@@ -245,7 +245,7 @@ suite.addBatch({
 		'value results': function (topic) {
 			assert.equal(topic.value, 8);
 		},
-		
+
 		'name': function (topic) {
 			assert.equal(topic.object.getName(), '8 classes');
 		},

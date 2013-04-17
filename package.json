@@ -1,10 +1,9 @@
 {
   "name": "promise-object",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "helper object for when.js",
   "main": "index.js",
-  "directories": {
-  },
+  "directories": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/icodeforlove/node-promise-object.git"
@@ -20,7 +19,7 @@
     "vows": "0.7.0"
   },
   "dependencies": {
-    "when": "git://github.com/icodeforlove/when.git",
+    "whenplus": "~1.7.1g",
     "underscore": "~1.4.4"
   },
   "scripts": {

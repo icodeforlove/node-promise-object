@@ -19,7 +19,7 @@
     "vows": "0.7.0"
   },
   "dependencies": {
-    "whenplus": "~1.7.1g",
+    "whenplus": "1.7.1g",
     "underscore": "~1.4.4"
   },
   "scripts": {

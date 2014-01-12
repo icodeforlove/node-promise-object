@@ -20,7 +20,7 @@ function makeMethod (func, scope, name) {
 	}
 }
 
-function mapPseudoArgs (scope, func, params, name, superMethod) {
+function mapPseudoArgsToMethod (func, scope, name, params, superMethod) {
 	function mapArgsArray (args, actualArgsArray) {
 
 		for (var param in params) {
@@ -82,7 +82,7 @@ function mapMethod (func, scope, name, superMethod) {
 	if (args) {
 		args = args[1].replace(/\s/g, '').split(',');
 
-		return mapPseudoArgs(scope, func, args, name, superMethod);
+		return mapPseudoArgsToMethod(func, scope, name, args, superMethod);
 	} else if (func instanceof ExtendedMethod) {
 		var superFunc,
 			current = func.superFunc,

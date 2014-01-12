@@ -140,7 +140,7 @@ function addMixins (args) {
 var Class = function () {};
 Class.create = function () {
 	var Self = this,
-		instance = function (cookie) {
+		instance = function (_Class) {
 			var self = this;
 
 			self.reopen = function (methods) {
@@ -149,7 +149,7 @@ Class.create = function () {
 				}
 			};
 
-			if (cookie !== isFunction && isFunction(this.initialize)) {
+			if (_Class !== Class && isFunction(this.initialize)) {
 				for (var method in this) if (method.substr(0, 1) !== '$' && isFunction(this[method])) {
 					this[method] = mapMethod(this[method], this, method);
 				}
@@ -165,8 +165,8 @@ Class.create = function () {
 			}
 		};
 
-	// pass in magic cookie
-	instance.prototype = new Self(isFunction);
+	// when Class is passed in the initialize method will not be run
+	instance.prototype = new Self(Class);
 
 	var proto = arguments.length > 1 ? addMixins(arguments) : arguments[0];
 

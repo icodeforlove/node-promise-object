@@ -19,7 +19,8 @@ these pseudo params are supported
 helper that makes working with $config objects a little easier
 
 ```javascript
-var PromiseObject = require('promise-object');
+var Promise = require('bluebird'),
+	PromiseObject = require('promise-object')(Promise);
 
 var User = PromiseObject.create({
 	initialize: function ($config) {
@@ -55,12 +56,13 @@ var Class = PromiseObject.create({
 this would allow you to call the class method via `Class.method`
 
 ## $deferred / promises
-promises make life a lot easier when dealing with heavy async logic, promise-object uses [when](https://github.com/cujojs/when) for promises so all deferred methods can be used with **when** and not have any scope issues.
+promoise-object is promise library agnostic, you initialize the wrapper by passing in the promise library you are using.
 
 below is an example of using promises and showing errors
 
 ```javascript
-var PromiseObject = require('promise-object');
+var Promise = require('bluebird'),
+	PromiseObject = require('promise-object')(Promise);
 
 var User = PromiseObject.create({
 	initialize: function (name) {
@@ -92,7 +94,8 @@ joe.getInfo(false).then(
 ## extending
 any method can be extended upon, **$super** is used to request the parent method
 ```javascript
-var PromiseObject = require('promise-object');
+var Promise = require('bluebird'),
+	PromiseObject = require('promise-object')(Promise);
 
 var User = PromiseObject.create({
 	initialize: function (name) {
@@ -157,7 +160,8 @@ when you reopen a method that already exists you gain access to `$super`
 
 ## mixins
 ```javascript
-var PromiseObject = require('promise-object');
+var Promise = require('bluebird'),
+	PromiseObject = require('promise-object')(Promise);
 
 var Mixin =  {
 	getRandomNumber: function () {

@@ -1,6 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	PromiseObject = require('../index'),
+	Promise = require('bluebird'),
+	PromiseObject = require('../index')(Promise),
 	EventsMixin = require('../mixins/events');
 
 var MixinWithoutPseudoParams = {

@@ -1,7 +1,7 @@
 {
   "name": "promise-object",
-  "version": "0.0.22",
-  "description": "helper object for when.js",
+  "version": "0.1.0",
+  "description": "promise-object wrapper for any type of promise",
   "main": "index.js",
   "directories": {},
   "repository": {
@@ -19,7 +19,7 @@
     "vows": "0.7.0"
   },
   "dependencies": {
-    "whenplus": "1.7.1g"
+    "bluebird": "1.0.0"
   },
   "scripts": {
     "test": "vows --spec"

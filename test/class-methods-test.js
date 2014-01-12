@@ -1,6 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	PromiseObject = require('../index');
+	Promise = require('bluebird'),
+	PromiseObject = require('../index')(Promise);
 
 var Class = PromiseObject.create({
 	initialize: function () {
@@ -38,7 +39,7 @@ var Class = PromiseObject.create({
 
 var Class2 = Class.extend({
 	$deferredMethod: function ($deferred, $super) {
-		$super().done(function (result) {
+		$super().then(function (result) {
 			$deferred.resolve(result + ' two');
 		});
 	}
@@ -46,7 +47,7 @@ var Class2 = Class.extend({
 
 var Class3 = Class2.extend({
 	$deferredMethod: function ($deferred, $super) {
-		$super().done(function (result) {
+		$super().then(function (result) {
 			$deferred.resolve(result + ' three');
 		});
 	}

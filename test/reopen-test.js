@@ -1,6 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	PromiseObject = require('../index');
+	Promise = require('bluebird'),
+	PromiseObject = require('../index')(Promise);
 
 var Class = PromiseObject.create({
 	initialize: function () {
@@ -44,7 +45,7 @@ var Class2 = Class.extend({
 
 		this.reopen({
 			deferredMethod: function ($deferred, $super) {
-				$super().done(function (result) {
+				$super().then(function (result) {
 					$deferred.resolve(result + ' two');
 				});
 			}
@@ -54,7 +55,7 @@ var Class2 = Class.extend({
 
 Class2.reopen({
 	deferredMethod: function ($deferred, $super) {
-		$super().done(function (result) {
+		$super().then(function (result) {
 			$deferred.resolve(result + ' two');
 		});
 	}
@@ -62,7 +63,7 @@ Class2.reopen({
 
 Class2.reopen({
 	deferredMethod: function ($deferred, $super) {
-		$super().done(function (result) {
+		$super().then(function (result) {
 			$deferred.resolve(result + ' three');
 		});
 	}
@@ -104,7 +105,7 @@ suite.addBatch({
 		topic: function () {
 			var self = this;
 
-			Class2.deferredMethod().done(function (result) {
+			Class2.deferredMethod().then(function (result) {
 				self.callback(null, result);
 			});
 		},
@@ -119,7 +120,7 @@ suite.addBatch({
 			var self = this;
 
 			var instance = new Class2();
-			instance.deferredMethod().done(function (result) {
+			instance.deferredMethod().then(function (result) {
 				self.callback(null, result);
 			});
 		},

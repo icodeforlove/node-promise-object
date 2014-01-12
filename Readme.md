@@ -35,21 +35,21 @@ new User(); // this does not error out because $config was replaced with an empt
 you can specify class methods by placing a $ in front of the method like this
 
 ```javascript
-	var Class = PromiseObject.create({
-		initialize: function () {
-			Class.method(); // returns 'class method'
+var Class = PromiseObject.create({
+	initialize: function () {
+		Class.method(); // returns 'class method'
 
-			this.method(); // returns 'instance method'
-		},
+		this.method(); // returns 'instance method'
+	},
 
-		$method: function () {
-			return 'class method';
-		},
+	$method: function () {
+		return 'class method';
+	},
 
-		method: function () {
-			return 'instance method';
-		}
-	});
+	method: function () {
+		return 'instance method';
+	}
+});
 ```
 
 this would allow you to call the class method via `Class.method`
@@ -125,35 +125,35 @@ var joe = new Admin('joe');
 joe.getInfo().then(function (info) {
 	console.log(info);
 });
+```
 
 ## reopen
 you can add methods to an instance by passing them via `.reopen` like this
 
 ```javascript
-	var user = new User();
-	user.reopen({
-		getName: function ($deferred, $self) {
-			setTimeout(function () {
-				$deferred.resolve($self._name);
-			}, 1000);
-		}
-	});
+var user = new User();
+user.reopen({
+	getName: function ($deferred, $self) {
+		setTimeout(function () {
+			$deferred.resolve($self._name);
+		}, 1000);
+	}
+});
 ```
 
 and you can add methods to a class like this
 
 ```javascript
-	User.reopen({
-		getName: function ($deferred, $self) {
-			setTimeout(function () {
-				$deferred.resolve($self._name);
-			}, 1000);
-		}
-	});
+User.reopen({
+	getName: function ($deferred, $self) {
+		setTimeout(function () {
+			$deferred.resolve($self._name);
+		}, 1000);
+	}
+});
 ```
 
 when you reopen a method that already exists you gain access to `$super`
-```
 
 ## mixins
 ```javascript

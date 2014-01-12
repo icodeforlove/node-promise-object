@@ -19,8 +19,7 @@
     "vows": "0.7.0"
   },
   "dependencies": {
-    "whenplus": "1.7.1g",
-    "underscore": "~1.4.4"
+    "whenplus": "1.7.1g"
   },
   "scripts": {
     "test": "vows --spec"

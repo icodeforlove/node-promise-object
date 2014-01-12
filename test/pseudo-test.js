@@ -85,7 +85,7 @@ suite.addBatch({
 		},
 
 		'is the name set': function (error, topic) {
-			assert.equal(error.message, 'Pseudo $super Argument: "initialize" has no super method');
+			assert.equal(error.message, '$super argument for "initialize" has no super method');
 		}
 	}
 });

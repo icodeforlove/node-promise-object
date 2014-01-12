@@ -45,7 +45,11 @@ function mapPseudoArgs (scope, func, params, name, superMethod) {
 		var args = [],
 			actualArgsArray = Array.prototype.slice.call(arguments);
 
-		if (params.indexOf('$deferred') === 0) {
+		if (params.indexOf('$deferred') !== -1) {
+			var index = params.indexOf('$deferred');
+
+			if (index !== 0) throw new Error('Pseudo $deferred Param: has an arguments index of ' + index + ' and needs to be 0');
+
 			var deferred = when.defer();
 
 			args.push(deferred);
@@ -57,7 +61,6 @@ function mapPseudoArgs (scope, func, params, name, superMethod) {
 			func.apply(scope, args);
 
 			return deferred.promise;
-
 		} else {
 			mapArgsArray(args, actualArgsArray);
 

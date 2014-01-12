@@ -129,8 +129,6 @@ joe.getInfo().then(function (info) {
 ## reopen
 you can add methods to an instance by passing them via `.reopen` like this
 
-```j
-
 ```javascript
 	var user = new User();
 	user.reopen({

@@ -1,6 +1,6 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	PromiseObject = require('../lib/promise-object'),
+	PromiseObject = require('../index'),
 	EventsMixin = require('../mixins/events');
 
 var MixinWithoutPseudoParams = {
@@ -79,7 +79,7 @@ suite.addBatch({
 				}
 			});
 
-			this.callback(null, new Example('james'));	
+			this.callback(null, new Example('james'));
 		},
 
 		'does error exist': function (topic) {

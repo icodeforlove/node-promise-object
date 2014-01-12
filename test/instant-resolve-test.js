@@ -1,7 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
 	when = require('whenplus'),
-	PromiseObject = require('../lib/promise-object');
+	PromiseObject = require('../index');
 
 var Class1 = PromiseObject.create({
 	initialize: function ($config) {

@@ -1,11 +1,11 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	PromiseObject = require('../lib/promise-object'),
+	PromiseObject = require('../index'),
 	EventsMixin = require('../mixins/events');
 
 var Class = PromiseObject.create(EventsMixin, {
 	initialize: function () {
-		
+
 	},
 
 	ping: function ($self) {

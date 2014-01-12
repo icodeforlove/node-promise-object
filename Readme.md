@@ -31,6 +31,29 @@ new User({name: 'joe'});
 new User(); // this does not error out because $config was replaced with an empty object
 ```
 
+## class / instance methods
+you can specify class methods by placing a $ in front of the method like this
+
+```javascript
+	var Class = PromiseObject.create({
+		initialize: function () {
+			Class.method(); // returns 'class method'
+
+			this.method(); // returns 'instance method'
+		},
+
+		$method: function () {
+			return 'class method';
+		},
+
+		method: function () {
+			return 'instance method';
+		}
+	});
+```
+
+this would allow you to call the class method via `Class.method`
+
 ## $deferred / promises
 promises make life a lot easier when dealing with heavy async logic, promise-object uses [when](https://github.com/cujojs/when) for promises so all deferred methods can be used with **when** and not have any scope issues.
 
@@ -102,6 +125,36 @@ var joe = new Admin('joe');
 joe.getInfo().then(function (info) {
 	console.log(info);
 });
+
+## reopen
+you can add methods to an instance by passing them via `.reopen` like this
+
+```j
+
+```javascript
+	var user = new User();
+	user.reopen({
+		getName: function ($deferred, $self) {
+			setTimeout(function () {
+				$deferred.resolve($self._name);
+			}, 1000);
+		}
+	});
+```
+
+and you can add methods to a class like this
+
+```javascript
+	User.reopen({
+		getName: function ($deferred, $self) {
+			setTimeout(function () {
+				$deferred.resolve($self._name);
+			}, 1000);
+		}
+	});
+```
+
+when you reopen a method that already exists you gain access to `$super`
 ```
 
 ## mixins
@@ -142,14 +195,14 @@ var Mixin =  {
 	initialize: function () {
 		this._tags = [];
 	},
-	
+
 	hasTag: function (tag) {
 		return this._tags.indexOf(tag) !== -1;
 	},
 
 	addTag: function (tag) {
 		if (this.hasTag(tag)) return;
-		
+
 		this._tags.push(tag);
 	}
 };

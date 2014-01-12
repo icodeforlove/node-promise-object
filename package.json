@@ -16,9 +16,7 @@
   "author": "Chad Scira",
   "license": "MIT",
   "devDependencies": {
-    "vows": "0.7.0"
-  },
-  "dependencies": {
+    "vows": "0.7.0",
     "bluebird": "1.0.0"
   },
   "scripts": {

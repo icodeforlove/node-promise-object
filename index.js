@@ -21,12 +21,13 @@ module.exports = function (Promise) {
 
 	function mapPseudoArgsToMethod (func, scope, name, params, superMethod) {
 		function mapArgsArray (args, actualArgsArray) {
-
 			for (var param in params) {
 				if (typeof params[param] !== 'string') continue;
 
 				if (params[param] === '$self') {
 					args.push(scope);
+				} else if (params[param] === '$class') {
+						args.push(scope.__class__);
 				} else if (params[param] === '$super') {
 					if (!superMethod) throw new Error('$super argument for "' + name + '" has no super method');
 					args.push(superMethod);
@@ -71,7 +72,7 @@ module.exports = function (Promise) {
 
 	function getPseudoArgs (string) {
 		var args = string.match(/^function \(([a-z0-9_$,\s]+)\)/i);
-		return (args && /\$(deferred|self|super|config)/.test(args[1])) ? args : false;
+		return (args && /\$(deferred|self|super|config|class)/.test(args[1])) ? args : false;
 	}
 
 	function mapMethod (func, scope, name, superMethod) {
@@ -179,7 +180,7 @@ module.exports = function (Promise) {
 			}
 		}
 
-		instance.prototype.constructor = instance;
+		instance.prototype.constructor = instance.prototype.__class__ = instance;
 		instance.extend = this.extend || this.create;
 		instance.reopen = function (methods) {
 			for (var method in methods) {

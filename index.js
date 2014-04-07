@@ -150,8 +150,10 @@ module.exports = function (Promise) {
 				};
 
 				if (_Class !== Class && isFunction(this.initialize)) {
-					for (var method in this) if (method.substr(0, 1) !== '$' && isFunction(this[method])) {
-						this[method] = mapMethod(this[method], this, method);
+					for (var method in this) {
+						if (method.substr(0, 1) !== '$' && method !== '__class__' && isFunction(this[method])) {
+							this[method] = mapMethod(this[method], this, method);
+						}
 					}
 
 					if (this.___mixin_initializers___) {

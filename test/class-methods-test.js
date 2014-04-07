@@ -8,6 +8,14 @@ var Class = PromiseObject.create({
 
 	},
 
+	getClassReference: function ($class) {
+		return $class;
+	},
+
+	$getClassReference: function ($class) {
+		return $class;
+	},
+
 	$method: function () {
 		return 'class method';
 	},
@@ -129,6 +137,26 @@ suite.addBatch({
 		'expected success': function (result) {
 			assert.equal(result, 'class method two three');
 		}
+	},
+
+	'test $class pseudo property': {
+		topic: new Class({name: ''}),
+
+		'instance method returns $class reference': function (topic) {
+			assert.isTrue(topic.getClassReference() === Class);
+		},
+
+		'class method returns $class reference': function (topic) {
+			assert.isTrue(Class.getClassReference() === Class);
+		}
+
+		// 'name': function (topic) {
+		// 	assert.equal(topic.object.getName(), '2 classes');
+		// },
+
+		// 'bitwise count': function (topic) {
+		// 	assert.equal(topic.object.getCount(), 3);
+		// }
 	}
 });
 exports.suite = suite;

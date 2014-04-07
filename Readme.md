@@ -14,6 +14,7 @@ there are a few rules with these params
 these pseudo params are supported
 * **$deferred** converts the method into a deferred method
 * **$super** returns the parent method
+* **$class** returns the class refernce
 * **$self** alternative to var self = this;
 * **$config** ensures that the first argument is an object
 

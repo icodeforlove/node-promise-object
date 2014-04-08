@@ -40,8 +40,8 @@ you can specify class methods by placing a $ in front of the method like this
 
 ```javascript
 var Class = PromiseObject.create({
-	initialize: function () {
-		Class.method(); // returns 'class method'
+	initialize: function ($class) {
+		$class.method(); // returns 'class method'
 
 		this.method(); // returns 'instance method'
 	},

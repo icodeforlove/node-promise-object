@@ -98,7 +98,7 @@ joe.getInfo(false).then(
 
 if you are using a promise library that has `coroutine` support (like bluebird) you can do the following
 
-```
+```javascript
 getInfo: function *($deferred) {
 	var one = yield this.getSomething();
 	$deferred.resolve(one);

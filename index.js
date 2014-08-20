@@ -57,7 +57,11 @@ module.exports = function (Promise) {
 
 				args = args.concat(actualArgsArray);
 
-				func.apply(scope, args);
+				if (func.constructor.name === 'GeneratorFunction') {
+					Promise.coroutine(func).apply(scope, args);
+				} else {
+					func.apply(scope, args);
+				}
 
 				return resolver.promise;
 			} else {
@@ -71,7 +75,7 @@ module.exports = function (Promise) {
 	}
 
 	function getPseudoArgs (string) {
-		var args = string.match(/^function \(([a-z0-9_$,\s]+)\)/i);
+		var args = string.match(/^function\*? \(([a-z0-9_$,\s]+)\)/i);
 		return (args && /\$(deferred|self|super|config|class)/.test(args[1])) ? args : false;
 	}
 

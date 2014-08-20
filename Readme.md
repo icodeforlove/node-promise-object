@@ -94,6 +94,17 @@ joe.getInfo(false).then(
 );
 ```
 
+## deferred generators
+
+if you are using a promise library that has `coroutine` support (like bluebird) you can do the following
+
+```
+getInfo: function *($deferred) {
+	var one = yield this.getSomething();
+	$deferred.resolve(one);
+}
+```
+
 ## extending
 any method can be extended upon, **$super** is used to request the parent method
 ```javascript

@@ -1,6 +1,6 @@
 {
   "name": "promise-object",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "promise-object wrapper for any type of promise",
   "main": "index.js",
   "directories": {},

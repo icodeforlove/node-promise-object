@@ -58,7 +58,9 @@ module.exports = function (Promise) {
 				args = args.concat(actualArgsArray);
 
 				if (func.constructor.name === 'GeneratorFunction') {
-					Promise.coroutine(func).apply(scope, args);
+					Promise.coroutine(func).apply(scope, args).then(null, function (error) {
+						resolver.reject(error);
+					});
 				} else {
 					func.apply(scope, args);
 				}

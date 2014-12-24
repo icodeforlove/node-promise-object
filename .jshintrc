@@ -1,4 +1,5 @@
 {
 	"node": true,
-	"strict": false
+	"strict": false,
+	"evil": true
 }

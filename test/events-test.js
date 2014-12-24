@@ -1,7 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	Promise = require('bluebird'),
-	PromiseObject = require('../index')(Promise),
+	BlueBird = require('bluebird'),
+	PromiseObject = require('../index')(BlueBird),
 	EventsMixin = require('../mixins/events');
 
 var Class = PromiseObject.create(EventsMixin, {

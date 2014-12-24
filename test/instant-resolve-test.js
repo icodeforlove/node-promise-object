@@ -1,7 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	Promise = require('bluebird'),
-	PromiseObject = require('../index')(Promise);
+	BlueBird = require('bluebird'),
+	PromiseObject = require('../index')(BlueBird);
 
 var Class1 = PromiseObject.create({
 	initialize: function ($config) {
@@ -9,7 +9,7 @@ var Class1 = PromiseObject.create({
 	},
 
 	checkNumbers: function ($deferred, numbers) {
-		Promise.map(numbers, this.checkNumber).then(
+		BlueBird.map(numbers, this.checkNumber).then(
 			function (result) {
 				$deferred.resolve(result);
 			},

@@ -1,7 +1,7 @@
 var vows = require('vows'),
 	assert = require('assert'),
-	Promise = require('bluebird'),
-	PromiseObject = require('../index')(Promise);
+	BlueBird = require('bluebird'),
+	PromiseObject = require('../index')(BlueBird);
 
 var supportsGenerators = true;
 try {
@@ -28,7 +28,7 @@ var DeferredTest = PromiseObject.create({
 					$deferred.resolve();
 				}, function (error) {
 					$deferred.reject(error);	
-				})
+				});
 			}
 		}, 0);
 	}

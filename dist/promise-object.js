@@ -1,5 +1,5 @@
 /**
- * promise-object.js v0.1.4
+ * promise-object.js v0.1.5
  */
 var PromiseObject =
 /******/ (function(modules) { // webpackBootstrap
@@ -53,6 +53,19 @@ var PromiseObject =
 			return 'function' == typeof obj || obj instanceof ExtendedMethod;
 		}
 	
+		function deferPromise (Promise)  {
+			var result = {};
+			result.promise = new Promise(function(resolve, reject) {
+				result.resolve = function(value) {
+					resolve(value);
+				};
+				result.reject = function(value) {
+					reject(value);
+				};
+			});
+			return result;
+		}
+	
 		function ExtendedMethod (name, func, superFunc) {
 			this.name = name;
 			this.func = func;
@@ -99,7 +112,7 @@ var PromiseObject =
 	
 					if (index !== 0) throw new Error('$deferred argument on the "' + name + '" method has an arguments index of ' + index + ' and needs to be 0');
 	
-					var resolver = Promise.defer();
+					var resolver = Promise.defer ? Promise.defer() : deferPromise(Promise);
 	
 					args.push(resolver);
 	

@@ -3,6 +3,19 @@ module.exports = function (Promise) {
 		return 'function' == typeof obj || obj instanceof ExtendedMethod;
 	}
 
+	function deferPromise (Promise)  {
+		var result = {};
+		result.promise = new Promise(function(resolve, reject) {
+			result.resolve = function(value) {
+				resolve(value);
+			};
+			result.reject = function(value) {
+				reject(value);
+			};
+		});
+		return result;
+	}
+
 	function ExtendedMethod (name, func, superFunc) {
 		this.name = name;
 		this.func = func;
@@ -49,7 +62,7 @@ module.exports = function (Promise) {
 
 				if (index !== 0) throw new Error('$deferred argument on the "' + name + '" method has an arguments index of ' + index + ' and needs to be 0');
 
-				var resolver = Promise.defer();
+				var resolver = Promise.defer ? Promise.defer() : deferPromise(Promise);
 
 				args.push(resolver);
 

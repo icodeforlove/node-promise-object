@@ -24,7 +24,7 @@ var Class = PromiseObject.create({
 		return 'prototype method';
 	},
 
-	$deferredMethod: function ($deferred) {
+	$deferredMethod: function $deferredMethod ($deferred) {
 		$deferred.resolve('class method');
 	},
 

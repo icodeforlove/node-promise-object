@@ -1,5 +1,5 @@
 /**
- * promise-object.js v0.1.5
+ * promise-object.js v0.1.6
  */
 var PromiseObject =
 /******/ (function(modules) { // webpackBootstrap
@@ -140,7 +140,7 @@ var PromiseObject =
 		}
 	
 		function getPseudoArgs (string) {
-			var args = string.match(/^function\*? \(([a-z0-9_$,\s]+)\)/i);
+			var args = string.match(/^function\*? [^\(]*\(([a-z0-9_$,\s]+)\)/i);
 			return (args && /\$(deferred|self|super|config|class)/.test(args[1])) ? args : false;
 		}
 	

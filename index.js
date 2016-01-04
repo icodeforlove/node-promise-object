@@ -90,7 +90,7 @@ module.exports = function (Promise) {
 	}
 
 	function getPseudoArgs (string) {
-		var args = string.match(/^function\*? \(([a-z0-9_$,\s]+)\)/i);
+		var args = string.match(/^function\*? [^\(]*\(([a-z0-9_$,\s]+)\)/i);
 		return (args && /\$(deferred|self|super|config|class)/.test(args[1])) ? args : false;
 	}
 

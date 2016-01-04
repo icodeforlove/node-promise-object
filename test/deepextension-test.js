@@ -18,7 +18,7 @@ var Class1 = PromiseObject.create({
 		return this._count;
 	},
 
-	updateCount: function ($deferred, $self, value) {
+	updateCount: function updateCount ($deferred, $self, value) {
 		setTimeout(function () {
 			$self._count += 1;
 			$self.log('Class1:updateCount', $self._count);

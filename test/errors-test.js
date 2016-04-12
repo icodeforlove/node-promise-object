@@ -3,6 +3,15 @@ var vows = require('vows'),
 	BlueBird = require('bluebird'),
 	PromiseObject = require('../index')(BlueBird);
 
+// shim in delay
+Promise.delay = function (interval) {
+	return new Promise(function (resolve) {
+		setTimeout(function () {
+			resolve();
+		}, interval);
+	});
+};
+
 var supportsGenerators = true;
 try {
 	eval('(function *(){})()');

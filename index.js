@@ -62,7 +62,7 @@ module.exports = function (Promise) {
 
 				if (index !== 0) throw new Error('$deferred argument on the "' + name + '" method has an arguments index of ' + index + ' and needs to be 0');
 
-				var resolver = Promise.defer ? Promise.defer() : deferPromise(Promise);
+				var resolver = deferPromise(Promise);
 
 				args.push(resolver);
 

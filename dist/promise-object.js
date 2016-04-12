@@ -1,5 +1,5 @@
 /**
- * promise-object.js v0.1.6
+ * promise-object.js v0.1.7
  */
 var PromiseObject =
 /******/ (function(modules) { // webpackBootstrap
@@ -112,7 +112,7 @@ var PromiseObject =
 	
 					if (index !== 0) throw new Error('$deferred argument on the "' + name + '" method has an arguments index of ' + index + ' and needs to be 0');
 	
-					var resolver = Promise.defer ? Promise.defer() : deferPromise(Promise);
+					var resolver = deferPromise(Promise);
 	
 					args.push(resolver);
 	
